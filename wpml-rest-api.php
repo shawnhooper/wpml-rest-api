@@ -11,17 +11,29 @@ Author URI: https://profiles.wordpress.org/shooper
 add_action( 'rest_api_init', 'wpmlretapi_slug_register_languages' );
 
 function wpmlretapi_slug_register_languages() {
-	register_api_field( 'post',
-			'language_code',
-			array(
-					'get_callback'    => 'wpmlretapi_slug_get_current_locale',
-					'update_callback' => null,
-					'schema'          => null,
-			)
+
+	// Add WPML fields to all post types
+	// Thanks to Roy Sivan for this trick.
+	// http://www.roysivan.com/wp-api-v2-adding-fields-to-all-post-types/#.VsH0e5MrLcM
+
+	$post_types = get_post_types( array( 'public' => true, 'exclude_from_search' => false ), 'names' );
+	foreach( $post_types as $post_type ) {
+		wpmlrestapi_register_api_field($post_type);
+	}
+}
+
+function wpmlrestapi_register_api_field($post_type) {
+	register_api_field( $post_type,
+		'wpml_current_locale',
+		array(
+			'get_callback'    => 'wpmlretapi_slug_get_current_locale',
+			'update_callback' => null,
+			'schema'          => null,
+		)
 	);
 
-	register_api_field( null,
-		'other_locales',
+	register_api_field( $post_type,
+		'wpml_translations',
 		array(
 			'get_callback'    => 'wpmlretapi_slug_get_translations',
 			'update_callback' => null,
