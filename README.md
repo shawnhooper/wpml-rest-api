@@ -2,7 +2,7 @@
 **Contributors:** shooper  
 **Donate link:** http://shawnhooper.ca/  
 **Tags:** wpml, api  
-**Requires at least:** 4.0  
+**Requires at least:** 4.4
 **Tested up to:** 4.4.2  
 **Stable tag:** trunk  
 **License:** GPLv2 or later  
