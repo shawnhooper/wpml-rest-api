@@ -14,6 +14,10 @@ Adds links to posts in other languages into the results of a WP REST API query f
 
 Adds links to posts in other languages into the results of a WP REST API query for sites running the WPML plugin.
 
+== Screenshots ==
+
+1. This screenshot shows an excerpt of the JSON returned by the WP REST API when a page has translations available
+
 == Changelog ==
 
 = 1.0 =
