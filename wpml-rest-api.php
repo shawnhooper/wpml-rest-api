@@ -59,7 +59,7 @@ function wpmlretapi_slug_get_translations( $object, $field_name, $request ) {
 		$post_id = icl_object_id($object['id'], 'page', false, $language['language_code']);
 		$post = get_post($post_id);
 		if ($post->ID && $object['id'] !== $post->ID) {
-			$translations[] = array('locale' => $language['default_locale'], 'id' => $post->ID, 'post_title' => $post->post_title, 'link' => get_permalink($post->ID));
+			$translations[] = array('locale' => $language['default_locale'], 'id' => $post->ID, 'post_title' => $post->post_title, 'href' => get_permalink($post->ID));
 		}
 	}
 
