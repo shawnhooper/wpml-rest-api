@@ -30,7 +30,7 @@ function wpmlretapi_init() {
 }
 
 function wpmlrestapi_register_api_field($post_type) {
-	register_api_field( $post_type,
+	register_rest_field( $post_type,
 		'wpml_current_locale',
 		array(
 			'get_callback'    => 'wpmlretapi_slug_get_current_locale',
@@ -39,7 +39,7 @@ function wpmlrestapi_register_api_field($post_type) {
 		)
 	);
 
-	register_api_field( $post_type,
+	register_rest_field( $post_type,
 		'wpml_translations',
 		array(
 			'get_callback'    => 'wpmlretapi_slug_get_translations',
