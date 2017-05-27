@@ -18,6 +18,20 @@ function wpmlretapi_init() {
 	if (!is_plugin_active('sitepress-multilingual-cms/sitepress.php')) {
 		return;
 	}
+	
+	$available_langs = wpml_get_active_languages_filter('', array('skip_missing' => false, ) );
+		
+	if ( ! empty( $available_langs ) && ! isset( $GLOBALS['icl_language_switched'] ) || ! $GLOBALS['icl_language_switched'] ) {
+		if ( isset( $_REQUEST['wpml_lang'] ) ) {
+			$lang = $_REQUEST['wpml_lang'];
+		} else if ( isset( $_REQUEST['lang'] ) ) {
+			$lang = $_REQUEST['lang'];
+		}
+		
+		if ( isset( $lang ) && in_array( $lang, array_keys( $available_langs ) ) ) {
+			do_action( 'wpml_switch_language', $lang );
+		}
+	}
 
 	// Add WPML fields to all post types
 	// Thanks to Roy Sivan for this trick.
