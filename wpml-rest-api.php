@@ -8,9 +8,9 @@ Author: Shawn Hooper
 Author URI: https://profiles.wordpress.org/shooper
 */
 
-add_action( 'rest_api_init', 'wpmlretapi_init', 1000);
+add_action( 'rest_api_init', 'wpmlrestapi_init', 1000);
 
-function wpmlretapi_init() {
+function wpmlrestapi_init() {
 
 	// Check if WPML is installed
 	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
@@ -33,7 +33,7 @@ function wpmlrestapi_register_api_field($post_type) {
 	register_rest_field( $post_type,
 		'wpml_current_locale',
 		array(
-			'get_callback'    => 'wpmlretapi_slug_get_current_locale',
+			'get_callback'    => 'wpmlrestapi_slug_get_current_locale',
 			'update_callback' => null,
 			'schema'          => null,
 		)
@@ -42,7 +42,7 @@ function wpmlrestapi_register_api_field($post_type) {
 	register_rest_field( $post_type,
 		'wpml_translations',
 		array(
-			'get_callback'    => 'wpmlretapi_slug_get_translations',
+			'get_callback'    => 'wpmlrestapi_slug_get_translations',
 			'update_callback' => null,
 			'schema'          => null,
 		)
@@ -58,7 +58,7 @@ function wpmlrestapi_register_api_field($post_type) {
 *
 * @return mixed
 */
-function wpmlretapi_slug_get_translations( $object, $field_name, $request ) {
+function wpmlrestapi_slug_get_translations( $object, $field_name, $request ) {
 	global $sitepress;
 	$languages = apply_filters('wpml_active_languages', null);
 	$translations = [];
@@ -95,7 +95,7 @@ function wpmlretapi_slug_get_translations( $object, $field_name, $request ) {
  *
  * @return mixed
  */
-function wpmlretapi_slug_get_current_locale( $object, $field_name, $request ) {
+function wpmlrestapi_slug_get_current_locale( $object, $field_name, $request ) {
 	$langInfo = wpml_get_language_information($object);
 	return $langInfo['locale'];
 }
