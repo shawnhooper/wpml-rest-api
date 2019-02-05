@@ -76,22 +76,28 @@ function wpmlrestapi_slug_get_translations( $object, $field_name, $request ) {
 	global $sitepress;
 	$languages = apply_filters('wpml_active_languages', null);
 	$translations = [];
+	$show_on_front = get_option( 'show_on_front' );
+	$page_on_front = get_option( 'page_on_front' );
 
 	foreach ($languages as $language) {
-		$post_id = wpml_object_id_filter($object['id'], 'post', false, $language['language_code']);
+		$post_id = apply_filters( 'wpml_object_id', $object['id'], 'post', false, $language['language_code'] );
 		if ($post_id === null || $post_id == $object['id']) continue;
 		$thisPost = get_post($post_id);
+		$href = apply_filters( 'wpmlrestapi_translations_href', $language['url'], $thisPost );
 
-		$href= apply_filters( 'WPML_filter_link', $language[ 'url' ], $language );
-		if (strpos($href, '?') !== false) {
-			$href = str_replace('?', '/' . $thisPost->post_name . '/?', $href);
+		if ( 'page' == $show_on_front && $object['id'] == $page_on_front ) {
+			$href = trailingslashit( $href );
 		} else {
+			if (strpos($href, '?') !== false) {
+				$href = str_replace('?', '/' . $thisPost->post_name . '/?', $href);
+			} else {
 
-			if (substr($href, -1) !== '/') {
-				$href .= '/';
+				if (substr($href, -1) !== '/') {
+					$href .= '/';
+				}
+
+				$href .= $thisPost->post_name . '/';
 			}
-
-			$href .= $thisPost->post_name . '/';
 		}
 
 		$translations[] = array('locale' => $language['default_locale'], 'id' => $thisPost->ID, 'post_title' => $thisPost->post_title, 'href' => $href);
