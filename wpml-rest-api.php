@@ -94,7 +94,7 @@ function wpmlrestapi_slug_get_translations( $object, $field_name, $request ) {
 			$href .= $thisPost->post_name . '/';
 		}
 
-		$link = get_page_link($post_id);
+		$link = get_permalink($post_id);
 
 		$translations[] = array(
 			'locale' => $language['default_locale'],
