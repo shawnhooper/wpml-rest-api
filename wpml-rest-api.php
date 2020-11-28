@@ -74,8 +74,10 @@ function wpmlrestapi_calculate_rel_path(WP_Post $thisPost): string
     $post_name = $thisPost->post_name;
     if ($thisPost->post_parent > 0) {
         $cur_post = get_post($thisPost->post_parent);
-        $rel_path = wpmlrestapi_calculate_rel_path($cur_post);
-        return $rel_path . "/" . $post_name;
+        if (isset($cur_post)) {
+            $rel_path = wpmlrestapi_calculate_rel_path($cur_post);
+            return $rel_path . "/" . $post_name;
+        }
     }
     return $post_name;
 }
