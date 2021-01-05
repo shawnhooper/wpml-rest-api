@@ -142,5 +142,7 @@ function wpmlrestapi_slug_get_translations( $object, $field_name, $request ) {
  */
 function wpmlrestapi_slug_get_current_locale( $object, $field_name, $request ) {
 	$langInfo = wpml_get_language_information($object);
-	return $langInfo['locale'];
+	if (!is_wp_error($langInfo)) {
+		return $langInfo['locale'];	
+	}
 }
