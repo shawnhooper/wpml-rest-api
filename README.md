@@ -21,6 +21,7 @@ Adds links to posts in other languages into the results of a WP REST API query f
 * Fix: Respect home and allow filtering of language url (Thank you ghost contributor)
 * Fix: Updated WPML filters/functions to replace deprecated ones.
 * Fix: No longer returns draft translations
+* Fix: When adding new posts - PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array (Thanks @darenzammit!)
 
 ### 1.0 ###
 * First release.
