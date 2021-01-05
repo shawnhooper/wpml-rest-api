@@ -2,7 +2,7 @@
 
 /*
 Plugin Name: WPML REST API
-Version: 1.0
+Version: 1.1
 Description: Adds links to posts in other languages into the results of a WP REST API query for sites running the WPML plugin.
 Author: Shawn Hooper
 Author URI: https://profiles.wordpress.org/shooper
