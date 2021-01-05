@@ -18,6 +18,9 @@ Adds links to posts in other languages into the results of a WP REST API query f
 
 ### 1.1 ###
 * Fix: properly renders URLs for pages that have parent parents (Thank you @rburgst)
+* Fix: Respect home and allow filtering of language url (Thank you ghost contributor)
+* Fix: Updated WPML filters/functions to replace deprecated ones.
+* Fix: No longer returns draft translations
 
 ### 1.0 ###
 * First release.
