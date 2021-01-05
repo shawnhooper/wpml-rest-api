@@ -16,16 +16,17 @@ Adds links to posts in other languages into the results of a WP REST API query f
 
 ## Changelog ##
 
-### 1.1 ###
+### 1.1 (2021-01-05) ###
 * Fix: properly renders URLs for pages that have parent parents (Thank you @rburgst)
 * Fix: Respect home and allow filtering of language url (Thank you ghost contributor)
 * Fix: Updated WPML filters/functions to replace deprecated ones.
 * Fix: No longer returns draft translations
 * Fix: When adding new posts - PHP Fatal error:  Uncaught Error: Cannot use object of type WP_Error as array (Thanks @darenzammit!)
 
+### 1.0.5 ###
+* Allows language switching by specifying 'lang' or 'wpml_lang' parameters on the query string.
+* Typos in code fixed.
+
 ### 1.0 ###
 * First release.
 
-### 1.1 ###
-* Allows language switching by specifying 'lang' or 'wpml_lang' parameters on the query string.
-* Typos in code fixed.
