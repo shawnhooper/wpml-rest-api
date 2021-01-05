@@ -64,6 +64,25 @@ function wpmlrestapi_register_api_field($post_type) {
 }
 
 /**
+ * Calculate the relative path for this post, supports also nested pages
+ *
+ * @param WP_Post $thisPost
+ * @return string the relative path for this page e.g. `root-page/child-page`
+ */
+function wpmlrestapi_calculate_rel_path(WP_Post $thisPost): string
+{
+    $post_name = $thisPost->post_name;
+    if ($thisPost->post_parent > 0) {
+        $cur_post = get_post($thisPost->post_parent);
+        if (isset($cur_post)) {
+            $rel_path = wpmlrestapi_calculate_rel_path($cur_post);
+            return $rel_path . "/" . $post_name;
+        }
+    }
+    return $post_name;
+}
+
+/**
 * Retrieve available translations
 *
 * @param array $object Details of current post.
@@ -83,15 +102,15 @@ function wpmlrestapi_slug_get_translations( $object, $field_name, $request ) {
 		$thisPost = get_post($post_id);
 
 		$href= apply_filters( 'WPML_filter_link', $language[ 'url' ], $language );
+		$postUrl = wpmlrestapi_calculate_rel_path($thisPost);
 		if (strpos($href, '?') !== false) {
-			$href = str_replace('?', '/' . $thisPost->post_name . '/?', $href);
+			$href = str_replace('?', '/' . $postUrl . '/?', $href);
 		} else {
-
 			if (substr($href, -1) !== '/') {
 				$href .= '/';
 			}
 
-			$href .= $thisPost->post_name . '/';
+			$href .= $postUrl . '/';
 		}
 
 		$translations[] = array('locale' => $language['default_locale'], 'id' => $thisPost->ID, 'post_title' => $thisPost->post_title, 'href' => $href);
