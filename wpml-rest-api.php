@@ -2,18 +2,32 @@
 
 /*
 Plugin Name: WPML REST API
-Version: 1.1
+Version: 1.1.1
 Description: Adds links to posts in other languages into the results of a WP REST API query for sites running the WPML plugin.
 Author: Shawn Hooper
 Author URI: https://profiles.wordpress.org/shooper
 */
 
-add_action( 'rest_api_init', 'wpmlrestapi_init', 1000);
+namespace Actionable\WordPress\WPML\REST_API;
 
-function wpmlrestapi_init() {
+use function add_action;
+use function apply_filters;
+use function do_action;
+use function get_option;
+use function get_post;
+use function get_post_types;
+use function is_plugin_active;
+use function is_wp_error;
+use function trailingslashit;
+use function wpml_get_active_languages_filter;
+use function wpml_get_language_information;
+
+add_action( 'rest_api_init', __NAMESPACE__ . '\\init', 1000 );
+
+function init() {
 
 	// Check if WPML is installed
-	include_once( ABSPATH . 'wp-admin/includes/plugin.php' );
+	include_once( \ABSPATH . 'wp-admin/includes/plugin.php' );
 
 	if (!is_plugin_active('sitepress-multilingual-cms/sitepress.php')) {
 		return;
@@ -39,15 +53,15 @@ function wpmlrestapi_init() {
 
 	$post_types = get_post_types( array( 'public' => true, 'exclude_from_search' => false ), 'names' );
 	foreach( $post_types as $post_type ) {
-		wpmlrestapi_register_api_field($post_type);
+		register_api_field($post_type);
 	}
 }
 
-function wpmlrestapi_register_api_field($post_type) {
+function register_api_field($post_type) {
 	register_rest_field( $post_type,
 		'wpml_current_locale',
 		array(
-			'get_callback'    => 'wpmlrestapi_slug_get_current_locale',
+			'get_callback'    => __NAMESPACE__ . '\\get_current_locale',
 			'update_callback' => null,
 			'schema'          => null,
 		)
@@ -56,7 +70,7 @@ function wpmlrestapi_register_api_field($post_type) {
 	register_rest_field( $post_type,
 		'wpml_translations',
 		array(
-			'get_callback'    => 'wpmlrestapi_slug_get_translations',
+			'get_callback'    => __NAMESPACE__ . '\\slug_get_translations',
 			'update_callback' => null,
 			'schema'          => null,
 		)
@@ -69,13 +83,13 @@ function wpmlrestapi_register_api_field($post_type) {
  * @param WP_Post $thisPost
  * @return string the relative path for this page e.g. `root-page/child-page`
  */
-function wpmlrestapi_calculate_rel_path(WP_Post $thisPost): string
+function calculate_rel_path(WP_Post $thisPost): string
 {
     $post_name = $thisPost->post_name;
     if ($thisPost->post_parent > 0) {
         $cur_post = get_post($thisPost->post_parent);
         if (isset($cur_post)) {
-            $rel_path = wpmlrestapi_calculate_rel_path($cur_post);
+            $rel_path = calculate_rel_path($cur_post);
             return $rel_path . "/" . $post_name;
         }
     }
@@ -91,7 +105,7 @@ function wpmlrestapi_calculate_rel_path(WP_Post $thisPost): string
 *
 * @return mixed
 */
-function wpmlrestapi_slug_get_translations( $object, $field_name, $request ) {
+function slug_get_translations( $object, $field_name, $request ) {
 	global $sitepress;
 	$languages = apply_filters('wpml_active_languages', null);
 	$translations = [];
@@ -140,7 +154,7 @@ function wpmlrestapi_slug_get_translations( $object, $field_name, $request ) {
  *
  * @return mixed
  */
-function wpmlrestapi_slug_get_current_locale( $object, $field_name, $request ) {
+function get_current_locale( $object, $field_name, $request ) {
 	$langInfo = wpml_get_language_information($object);
 	if (!is_wp_error($langInfo)) {
 		return $langInfo['locale'];	
