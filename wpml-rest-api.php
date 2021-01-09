@@ -70,7 +70,7 @@ function register_api_field($post_type) {
 	register_rest_field( $post_type,
 		'wpml_translations',
 		array(
-			'get_callback'    => __NAMESPACE__ . '\\slug_get_translations',
+			'get_callback'    => __NAMESPACE__ . '\\get_translations',
 			'update_callback' => null,
 			'schema'          => null,
 		)
@@ -105,7 +105,7 @@ function calculate_rel_path(WP_Post $thisPost): string
 *
 * @return mixed
 */
-function slug_get_translations( $object, $field_name, $request ) {
+function get_translations( $object, $field_name, $request ) {
 	global $sitepress;
 	$languages = apply_filters('wpml_active_languages', null);
 	$translations = [];
