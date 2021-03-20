@@ -129,7 +129,9 @@ class WPML_REST_API {
 				}
 			}
 
-			$translations[] = array('locale' => $language['default_locale'], 'id' => $thisPost->ID, 'post_title' => $thisPost->post_title, 'href' => $href);
+			$translation = array('locale' => $language['default_locale'], 'id' => $thisPost->ID, 'post_title' => $thisPost->post_title, 'href' => $href);
+			$translation = apply_filters( 'wpmlrestapi_get_translation', $translation, $thisPost, $language );
+			$translations[] = $translation;
 		}
 
 		return $translations;
