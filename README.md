@@ -3,7 +3,8 @@
 **Donate link:** http://shawnhooper.ca/  
 **Tags:** wpml, api, rest  
 **Requires at least:** 5.2  
-**Tested up to:** 5.6  
+**Requires PHP:** 7.0
+**Tested up to:** 5.7.2
 **Stable tag:** trunk  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
@@ -19,6 +20,7 @@ Adds links to posts in other languages into the results of a WP REST API query f
 ### 1.1.2 (2021-06-27) ###
 * Fixed child page URL handling
 * Adds 'wpmlrestapi_get_translation' filter immediately before adding translation to array (thanks @elskwid)
+* Requires PHP 7.0 line added to the plugin definition
 
 ### 1.1.1 (2021-01-05) ###
 * Fix: Refactored into a class and namesapce (thanks @szepeviktor)

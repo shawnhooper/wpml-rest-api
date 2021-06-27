@@ -3,7 +3,7 @@ Contributors: shooper
 Donate link: http://shawnhooper.ca/
 Tags: wpml, api, rest
 Requires at least: 5.2
-Tested up to: 5.6
+Tested up to: 5.7.2
 Requires PHP: 7.0
 Stable tag: trunk
 License: GPLv2 or later
