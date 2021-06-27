@@ -18,6 +18,7 @@ Adds links to posts in other languages into the results of a WP REST API query f
 
 ### 1.1.2 (2021-06-27) ###
 * Fixed child page URL handling
+* Adds 'wpmlrestapi_get_translation' filter immediately before adding translation to array (thanks @elskwid)
 
 ### 1.1.1 (2021-01-05) ###
 * Fix: Refactored into a class and namesapce (thanks @szepeviktor)
