@@ -17,6 +17,9 @@ Adds links to posts in other languages into the results of a WP REST API query f
 
 ## Changelog ##
 
+### 1.1.3 (2022-03-18) ###
+* Returns the post slug (post_name column) in the return value (thanks @mags1317)
+
 ### 1.1.2 (2021-06-27) ###
 * Fixed child page URL handling
 * Adds 'wpmlrestapi_get_translation' filter immediately before adding translation to array (thanks @elskwid)
