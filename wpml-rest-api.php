@@ -136,6 +136,7 @@ class WPML_REST_API {
 				$translation  = array(
 					'locale'     => $language['default_locale'],
 					'id'         => $thisPost->ID,
+					'slug'       => $thisPost->post_name,
 					'post_title' => $thisPost->post_title,
 					'href'       => $href,
 				);
