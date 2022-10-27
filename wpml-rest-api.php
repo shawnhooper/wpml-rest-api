@@ -29,7 +29,7 @@ class WPML_REST_API {
 
 		$available_languages = wpml_get_active_languages_filter('', array('skip_missing' => false, ) );
 
-		if ( ! empty( $available_languages ) && ! isset( $GLOBALS['icl_language_switched'] ) || ! $GLOBALS['icl_language_switched'] ) {
+		if ( (!empty($available_languages) && !isset($GLOBALS['icl_language_switched'])) || ! $GLOBALS['icl_language_switched'] ) {
 			if ( isset( $_REQUEST['wpml_lang'] ) ) {
 				$lang = $_REQUEST['wpml_lang'];
 			} else if ( isset( $_REQUEST['lang'] ) ) {
