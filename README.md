@@ -3,23 +3,34 @@
 **Donate link:** http://shawnhooper.ca/  
 **Tags:** wpml, api, rest  
 **Requires at least:** 5.2  
-**Tested up to:** 6.0  
-**Requires PHP:** 7.0  
+**Tested up to:** 6.0.3 
+**Requires PHP:** 7.4  
 **Stable tag:** trunk  
 **License:** GPLv2 or later  
 **License URI:** http://www.gnu.org/licenses/gpl-2.0.html  
 
-Adds links to posts in other languages into the results of a WP REST API query for sites running the WPML plugin.
+Get translations details with the WP REST API on sites running WordPress & WPML
 
 ## Description ##
 
-Adds links to posts in other languages into the results of a WP REST API query for sites running the WPML plugin.
+This plugin adds links to pages and posts in other languages into the results of a WP REST API query for sites running the WPML plugin.
+
+It adds a "wpml_current_locale" string containing the locale code of the current response, and a "wpml_translations" array
+containing the available translations for this plugin.
 
 ## Screenshots ##
 
 1. This screenshot shows an excerpt of the JSON returned by the WP REST API when a page has translations available
 
 ## Changelog ##
+
+### 2.0.0 (2022-10-27) ###
+* Fixed: Permalink style /yyyy/mm/dd/post_name/ returns slug without the dates (reported by @lukas-hablitzel)
+* Change: array keys in the wpml_translations response are now the locale code instead of an integer
+* Updated PHP Style: Short array syntax
+* Updated PHP Style: Added return types to all methods
+* Updated PHP Style: Added types to all parameters
+* Updated PHP Style: replaced str_pos with str_contains and str_ends_with
 
 ### 1.1.4 (2022-05-31) ###
 * Update build tool dependencies to fix CVE-2022-1537, CVE-2022-0436 and CVE-2020-7729
