@@ -2,7 +2,7 @@
 
 /*
 Plugin Name: WPML REST API
-Version: 2.0.0
+Version: 2.0.1
 Description: Adds links to posts in other languages into the results of a WP REST API query for sites running the WPML plugin.
 Author: Shawn Hooper
 Author URI: https://profiles.wordpress.org/shooper
@@ -134,6 +134,7 @@ class WPML_REST_API
     private function get_translations_for_language(array $object, array $language) : void {
         $post_id = wpml_object_id_filter($object['id'], 'post', false, $language['language_code']);
         if ($post_id === null || $post_id === $object['id']) {
+            $this->translations = [];
             return;
         }
 
