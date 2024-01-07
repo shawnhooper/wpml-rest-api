@@ -3,7 +3,7 @@
 **Donate link:** http://shawnhooper.ca/  
 **Tags:** wpml, api, rest  
 **Requires at least:** 5.2  
-**Tested up to:** 6.0.3 
+**Tested up to:** 6.4.2
 **Requires PHP:** 7.4  
 **Stable tag:** trunk  
 **License:** GPLv2 or later  
@@ -23,6 +23,9 @@ containing the available translations for this plugin.
 1. This screenshot shows an excerpt of the JSON returned by the WP REST API when a page has translations available
 
 ## Changelog ##
+
+### 2.0.1 (2022-10-27) ###
+* Fixed: Some posts without translations would return a random post when no translation was available
 
 ### 2.0.0 (2022-10-27) ###
 * Fixed: Permalink style /yyyy/mm/dd/post_name/ returns slug without the dates (reported by @lukas-hablitzel)
