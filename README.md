@@ -24,7 +24,7 @@ containing the available translations for this plugin.
 
 ## Changelog ##
 
-### 2.0.1 (2022-10-27) ###
+### 2.0.1 (2024-01-07) ###
 * Fixed: Some posts without translations would return a random post when no translation was available
 
 ### 2.0.0 (2022-10-27) ###
